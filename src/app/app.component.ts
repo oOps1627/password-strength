@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, ValidatorFn, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'password-test';
+  public passwordControl: FormControl;
+  public readonly passwordValidators: ValidatorFn[] = [
+    Validators.required,
+    Validators.minLength(8)
+  ];
+
+  constructor() {
+    this.passwordControl = new FormControl(null, this.passwordValidators);
+  }
 }
